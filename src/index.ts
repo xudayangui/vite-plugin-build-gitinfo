@@ -22,13 +22,14 @@ const getAppInfo = () => {
   };
 };
 interface Options {
+  showBuildUserEmail?: boolean;
   showBuildUser?: boolean;
   enableMeta?: boolean;
   enableLog?: boolean;
   enableGlobal?: boolean;
 }
 export default (option?: Options): Plugin => {
-  const { showBuildUser = false, enableMeta = false, enableLog = false, enableGlobal = false } = option || {};
+  const {showBuildUserEmail = false, showBuildUser = false, enableMeta = false, enableLog = false, enableGlobal = false } = option || {};
   return {
     name: 'vite-plugin-build-gitinfo',
     async transformIndexHtml() {
@@ -39,13 +40,12 @@ export default (option?: Options): Plugin => {
       };
       try {
         info.commit = COMMIT;
-        info.userName = COMMITUSERNAME;
-        info.ermail = COMMITUSERMAIL;
         info.commitdDate= COMMITDATE;
         info.branch = BRANCH;
         info.buildDate = BUILDDATE;
         info.tag= TAG;
-        showBuildUser && (info.buildUser = info.username);
+        showBuildUser && (info.buildUser = COMMITUSERNAME);
+        showBuildUserEmail && (info.buildUserEmail = COMMITUSERMAIL);
       } catch (error) {}
       let appInfoText = JSON.stringify(info);
       appInfoText = appInfoText.replace(/"/g, "'");

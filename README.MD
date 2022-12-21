@@ -8,13 +8,11 @@
 支持console.log、meta、全局变量三种方式，默认开启meta，如果环境没有git，这无法插入git相关信息。
 ```json
 {
-    commit 提交信息
-    userName 提交用户名
-    ermail 提交用户邮箱
-    commitdDate commit时间
-    branch 分支
-    buildDate 打包时间
-    tag  tag
+    "commit":"提交信息" ,
+    "commitdDate":"commit时间",
+    "branch":"分支",
+    "buildDate":"打包时间",
+    "tag": "tag"
 }
 ```
 
@@ -42,6 +40,7 @@ export default defineConfig({
 ## Config
 
 - `showBuildUser` - 显示打包的用户 (`false` by default)
-- `enableMeta` - 添加 \<meta name="app-info" content="{app-info}"> 到 \<head>中 (`true` by default)
+- `showBuildUserEmail` - 显示打包的用户邮箱 (`false` by default)
+- `enableMeta` - 添加 \<meta name="commit" content="commit"> 到 \<head>中 (`true` by default)
 - `enableLog` - Console打印 (`false` by default)
 - `enableGlobal` - 设置全局变量 *\`\_\_APP_INFO\_\_\`* . (`true` by default)
